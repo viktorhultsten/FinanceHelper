@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceHelper.Domain", "FinanceHelper.Domain\FinanceHelper.Domain.csproj", "{AE163E17-4D32-4168-A81A-F31E7E574DD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceHelper.Application", "FinanceHelper.Application\FinanceHelper.Application.csproj", "{5A6520B5-8B92-45B4-A7AA-844446F05BA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceHelper.Infrastructure", "FinanceHelper.Infrastructure\FinanceHelper.Infrastructure.csproj", "{DCACA5A0-3E06-4159-A105-DD6F5B18A143}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceHelper.WebApi", "FinanceHelper.WebApi\FinanceHelper.WebApi.csproj", "{87CAFED8-B1F8-43EA-BE64-CBD8946F26C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceHelper.EmbeddingWorker", "FinanceHelper.EmbeddingWorker\FinanceHelper.EmbeddingWorker.csproj", "{0CE988BD-FD79-4DB9-9CF4-72FF5739065B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceHelper.Core", "FinanceHelper.Core\FinanceHelper.Core.csproj", "{99E991BE-77A2-4843-BB19-E8BBCB64252A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE163E17-4D32-4168-A81A-F31E7E574DD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE163E17-4D32-4168-A81A-F31E7E574DD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE163E17-4D32-4168-A81A-F31E7E574DD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE163E17-4D32-4168-A81A-F31E7E574DD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A6520B5-8B92-45B4-A7AA-844446F05BA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A6520B5-8B92-45B4-A7AA-844446F05BA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A6520B5-8B92-45B4-A7AA-844446F05BA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A6520B5-8B92-45B4-A7AA-844446F05BA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCACA5A0-3E06-4159-A105-DD6F5B18A143}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCACA5A0-3E06-4159-A105-DD6F5B18A143}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCACA5A0-3E06-4159-A105-DD6F5B18A143}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCACA5A0-3E06-4159-A105-DD6F5B18A143}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87CAFED8-B1F8-43EA-BE64-CBD8946F26C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87CAFED8-B1F8-43EA-BE64-CBD8946F26C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87CAFED8-B1F8-43EA-BE64-CBD8946F26C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87CAFED8-B1F8-43EA-BE64-CBD8946F26C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CE988BD-FD79-4DB9-9CF4-72FF5739065B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CE988BD-FD79-4DB9-9CF4-72FF5739065B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CE988BD-FD79-4DB9-9CF4-72FF5739065B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CE988BD-FD79-4DB9-9CF4-72FF5739065B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99E991BE-77A2-4843-BB19-E8BBCB64252A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99E991BE-77A2-4843-BB19-E8BBCB64252A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99E991BE-77A2-4843-BB19-E8BBCB64252A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99E991BE-77A2-4843-BB19-E8BBCB64252A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

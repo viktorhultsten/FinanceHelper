@@ -1,0 +1,25 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Dev API",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/FinanceHelper.WebApi/bin/Debug/net8.0/FinanceHelper.WebApi.dll",
+      "cwd": "${workspaceFolder}/FinanceHelper.WebApi",
+      // "program": "dotnet",
+      // "args": [
+      //   "run",
+      //   "--project",
+      //   "${workspaceFolder}/FinanceHelper.WebApi"
+      // ],
+      // "cwd": "${workspaceFolder}",
+      "env": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  ]
+}

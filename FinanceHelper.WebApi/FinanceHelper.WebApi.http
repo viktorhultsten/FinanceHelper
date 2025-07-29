@@ -1,0 +1,6 @@
+@FinanceHelper.WebApi_HostAddress = http://localhost:5227
+
+GET {{FinanceHelper.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

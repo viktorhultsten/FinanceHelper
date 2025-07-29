@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Add EF Migration",
+      "type": "shell",
+      "command": "dotnet ef migrations add ${input:migrationName} --project FinanceHelper.Infrastructure --startup-project FinanceHelper.WebApi",
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      }
+    },
+    {
+      "label": "Update EF Migration",
+      "type": "shell",
+      "command": "dotnet ef database update --project FinanceHelper.Infrastructure --startup-project FinanceHelper.WebApi",
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "migrationName",
+      "type": "promptString",
+      "description": "Enter migration name"
+    }
+  ]
+}
