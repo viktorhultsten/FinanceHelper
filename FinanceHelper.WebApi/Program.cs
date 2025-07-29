@@ -21,6 +21,7 @@ builder.Services.AddScoped<IEmeddingRepository, EmbeddingRepository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 builder.Services.AddScoped<IEmbeddingService, EmbeddingService>();
 builder.Services.AddScoped<ICategorizerService, CategorizerService>();
+builder.Services.AddSingleton<IMessageQueueService, MessageQueueService>();
 
 builder.Services.AddControllers();
 

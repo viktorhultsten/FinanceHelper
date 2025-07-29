@@ -18,7 +18,7 @@ namespace FinanceHelper.WebApi.Controllers;
 [Route("/api/[controller]")]
 public class UploadController(
   ITransactionRepository _transactionRepository,
-  IOptions<QueueOptions> _options
+  IMessageQueueService _messageQueueService
   ) : ControllerBase
 {
   [HttpPost("csv")]
@@ -42,22 +42,7 @@ public class UploadController(
     {
       return Ok();
     }
-    Console.WriteLine(_options.Value.HostName);
-    var factory = new ConnectionFactory()
-    {
-      HostName = _options.Value.HostName
-      // HostName = "192.168.1.5"
-    };
-    using var connection = await factory.CreateConnectionAsync();
-    using var channel = await connection.CreateChannelAsync();
-    var res = await channel.QueueDeclareAsync(queue: "transactions",
-      durable: true,
-      exclusive: false,
-      autoDelete: false,
-      arguments: null
-    );
 
-    List<TransactionRecord> result = [];
     foreach (var record in records)
     {
       var tr = new TransactionRecord()
@@ -68,17 +53,7 @@ public class UploadController(
       };
       await _transactionRepository.AddTransactionsAsync([tr]);
       var message = new TransactionMessage() { TransactionId = tr.Id };
-      var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(message));
-      var props = new BasicProperties
-      {
-        DeliveryMode = DeliveryModes.Persistent
-      };
-      await channel.BasicPublishAsync<BasicProperties>("",
-        routingKey: "transactions",
-        mandatory: true,
-                basicProperties: props,
-        body: body);
-      result.Add(tr);
+      await _messageQueueService.PublishAsync(message);
     }
     return Created();
   }
