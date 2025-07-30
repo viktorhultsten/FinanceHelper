@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceHelper.Infrastructur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceHelper.WebApi", "FinanceHelper.WebApi\FinanceHelper.WebApi.csproj", "{87CAFED8-B1F8-43EA-BE64-CBD8946F26C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceHelper.EmbeddingWorker", "FinanceHelper.EmbeddingWorker\FinanceHelper.EmbeddingWorker.csproj", "{0CE988BD-FD79-4DB9-9CF4-72FF5739065B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceHelper.Core", "FinanceHelper.Core\FinanceHelper.Core.csproj", "{99E991BE-77A2-4843-BB19-E8BBCB64252A}"
 EndProject
 Global

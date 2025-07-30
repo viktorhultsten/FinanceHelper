@@ -1,16 +1,13 @@
 using System.Globalization;
 using System.Text;
-using System.Text.Json;
 using CsvHelper;
 using CsvHelper.Configuration;
 using FinanceHelper.Application.Interfaces;
-using FinanceHelper.Application.Options;
 using FinanceHelper.Core.Messages;
 using FinanceHelper.Domain.Dtos;
 using FinanceHelper.Domain.Models;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using RabbitMQ.Client;
 
 namespace FinanceHelper.WebApi.Controllers;
 
@@ -18,11 +15,11 @@ namespace FinanceHelper.WebApi.Controllers;
 [Route("/api/[controller]")]
 public class UploadController(
   ITransactionRepository _transactionRepository,
-  IMessageQueueService _messageQueueService
+  IPublishEndpoint _publishEndpoint
   ) : ControllerBase
 {
   [HttpPost("csv")]
-  public async Task<IActionResult> UploadCsv(IFormFile file)
+  public async Task<IActionResult> UploadCsv(IFormFile file, CancellationToken cancellationToken = default)
   {
     if (file == null || file.Length == 0)
     {
@@ -52,8 +49,7 @@ public class UploadController(
         Amount = ParseSwedishAmount(record.Belopp),
       };
       await _transactionRepository.AddTransactionsAsync([tr]);
-      var message = new TransactionMessage() { TransactionId = tr.Id };
-      await _messageQueueService.PublishAsync(message);
+      await _publishEndpoint.Publish(new TransactionMessage { TransactionId = tr.Id }, cancellationToken);
     }
     return Created();
   }
