@@ -1,6 +1,7 @@
 using FinanceHelper.Application.Interfaces;
 using FinanceHelper.Domain.Common;
 using FinanceHelper.Domain.Models;
+using Pgvector;
 
 namespace FinanceHelper.Application.Services;
 
@@ -9,41 +10,41 @@ public class CategorizerService(
   IEmeddingRepository _embeddingRepository
 ) : ICategorizerService
 {
-  public async Task<string> CategorizeAsync(string text)
+  public async Task<string> CategorizeAsync(TransactionRecord transaction)
   {
     var examples = await _embeddingRepository.LoadAsync();
 
-    var exactExample = examples.FirstOrDefault(example => example.Text.Equals(text));
+    var prompt = $"{transaction.Description} || {transaction.Date:yyyy-MM-dd} || {transaction.Amount}";
+    var exactExample = examples.FirstOrDefault(example => example.Text.Equals(prompt));
 
     if (exactExample != null)
     {
       return exactExample.Category;
     }
 
-    var embedding = await _embeddingService.EmbedTextAsync(text);
+    var embedding = await _embeddingService.EmbedTextAsync(prompt);
     var bestMatch = examples
+            .Where(ex => ex.Embedding != null)
             .Select(example => new
             {
               example.Category,
-              Similarity = VectorUtils.CosineSimilarity(embedding, example.Embedding)
+              Similarity = VectorUtils.CosineSimilarity(embedding, example.Embedding!.ToArray())
             })
             .OrderByDescending(x => x.Similarity)
             .FirstOrDefault();
 
-    var bestCategory = bestMatch != null && bestMatch.Similarity > 0.85f ? bestMatch.Category : "Other";
+    var bestCategory = bestMatch != null && bestMatch.Similarity > 0.8f ? bestMatch.Category : "Uncategorized";
 
-    Console.WriteLine($"\"{text}\" got {bestMatch?.Category} with {bestMatch?.Similarity} similarity");
-
-    if (!examples.Any(example => example.Text == text))
+    if (!examples.Any(example => example.Text == transaction.Description))
     {
       var newExample = new LabeledVector()
       {
         Category = bestCategory,
-        Text = text,
-        Embedding = embedding,
+        Text = prompt,
+        Embedding = new Vector(embedding),
       };
 
-      await _embeddingRepository.SaveAsync([.. examples, newExample]);
+      // await _embeddingRepository.SaveAsync(newExample);
     }
 
     return bestCategory;

@@ -1,6 +1,8 @@
+using FinanceHelper.Domain.Models;
+
 namespace FinanceHelper.Application.Interfaces;
 
 public interface ICategorizerService
 {
-  public Task<string> CategorizeAsync(string text);
+  public Task<string> CategorizeAsync(TransactionRecord transaction);
 }

@@ -1,13 +1,24 @@
+using FinanceHelper.Application.Interfaces;
 using FinanceHelper.Core.Messages;
 using MassTransit;
 
 namespace FinanceHelper.Infrastructure.Consumers;
 
-public class TransactionConsumer : IConsumer<TransactionMessage>
+public class TransactionConsumer(
+  ITransactionRepository _transactionRepository,
+  ICategorizerService _categorizerService
+) : IConsumer<TransactionMessage>
 {
-  public Task Consume(ConsumeContext<TransactionMessage> context)
+  public async Task Consume(ConsumeContext<TransactionMessage> context)
   {
-    Console.WriteLine($"Received: {context.Message.TransactionId}");
-    return Task.CompletedTask;
+    var transaction = await _transactionRepository.GetAndHoldByTransactionIdAsync(context.Message.TransactionId);
+    if (transaction == null)
+    {
+      return;
+    }
+
+    var category = await _categorizerService.CategorizeAsync(transaction);
+    transaction.Category = category;
+    await _transactionRepository.SetAndCompleteTransactionAsync(transaction);
   }
 }

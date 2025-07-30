@@ -12,7 +12,11 @@ using Microsoft.Extensions.Options;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<FinanceDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        npgsqlOpts => npgsqlOpts.UseVector()));
+
+
 
 builder.Services.Configure<EmbeddingServiceOptions>(
     builder.Configuration.GetSection("EmbeddingService"));
@@ -35,6 +39,8 @@ builder.Services.AddMassTransit(x =>
         cfg.ConfigureEndpoints(context);
     });
 });
+
+builder.Services.AddMinioClient(builder.Configuration);
 
 builder.Services.AddControllers();
 

@@ -1,8 +1,13 @@
-﻿namespace FinanceHelper.Domain.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using Pgvector;
 
-public record LabeledVector
+namespace FinanceHelper.Domain.Models;
+
+public class LabeledVector
 {
-  public string Category { get; init; } = string.Empty;
-  public string Text { get; init; } = string.Empty;
-  public float[] Embedding { get; init; } = [];
+  [Key]
+  public int Id { get; set; }
+  public string Category { get; set; } = string.Empty;
+  public string Text { get; set; } = string.Empty;
+  public Vector? Embedding { get; set; }
 }

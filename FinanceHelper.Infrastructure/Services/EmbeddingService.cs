@@ -1,6 +1,7 @@
 using System.Net.Http.Json;
 using FinanceHelper.Application.Interfaces;
 using FinanceHelper.Application.Options;
+using FinanceHelper.Domain.Models;
 using Microsoft.Extensions.Options;
 
 namespace FinanceHelper.Infrastructure.Services;
@@ -17,12 +18,12 @@ public class EmbeddingService : IEmbeddingService
     _http.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apiKey}");
   }
 
-  public async Task<float[]> EmbedTextAsync(string input)
+  public async Task<float[]> EmbedTextAsync(string prompt)
   {
     var content = new
     {
       model = "text-embedding-3-small",
-      input = input
+      input = prompt
     };
 
     var response = await _http.PostAsJsonAsync("https://api.openai.com/v1/embeddings", content);

@@ -45,7 +45,7 @@ public class UploadController(
       var tr = new TransactionRecord()
       {
         Date = DateTime.Parse(record.Datum).Date,
-        Description = record.Text,
+        Description = record.Text.Trim(),
         Amount = ParseSwedishAmount(record.Belopp),
       };
       await _transactionRepository.AddTransactionsAsync([tr]);

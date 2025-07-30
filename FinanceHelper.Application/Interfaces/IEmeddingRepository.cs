@@ -4,6 +4,6 @@ namespace FinanceHelper.Application.Interfaces;
 
 public interface IEmeddingRepository
 {
-  Task SaveAsync(List<LabeledVector> data);
+  Task SaveAsync(LabeledVector embedding);
   Task<List<LabeledVector>> LoadAsync();
 }
